@@ -2,6 +2,7 @@
   "name": "docs.tg-support-bot.ru",
   "version": "1.0.0",
   "description": "Документация для Telegram Support Bot",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",

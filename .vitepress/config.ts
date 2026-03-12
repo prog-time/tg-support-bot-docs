@@ -35,6 +35,14 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Установка',
+          collapsed: false,
+          items: [
+            { text: 'Установка на хостинг', link: '/docs/installation-on-hosting' },
+            { text: 'Установка через Docker Compose', link: '/docs/installation-on-docker-compose' },
+          ],
+        },
+        {
           text: 'Справочник',
           collapsed: false,
           items: [

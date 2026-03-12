@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "ignoreFiles": ["assets/main.scss"],
+  "rules": {
+    "no-descending-specificity": null,
+    "font-family-name-quotes": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "media-feature-range-notation": null,
+    "rule-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "scss/no-global-function-names": null
+  }
+}

@@ -1,0 +1,46 @@
+# Markdownlint configuration for blog project
+
+# Disable line length — blog posts have long prose lines
+MD013: false
+
+# Disable blanks around lists — Jekyll content often has lists right after text
+MD032: false
+
+# Disable unordered list style — allow both - and *
+MD004: false
+
+# Disable list marker space — allow flexible spacing
+MD030: false
+
+# Disable trailing spaces — not critical for blog
+MD009: false
+
+# Disable fenced code language — not all code blocks need a language
+MD040: false
+
+# Disable emphasis as heading — used stylistically in posts
+MD036: false
+
+# Disable bare URLs — acceptable in blog content
+MD034: false
+
+# Disable multiple blank lines — used for visual separation
+MD012: false
+
+# Disable blanks around headings — Jekyll layout constraints
+MD022: false
+
+# Disable ordered list prefix style — allow 1. 2. 3.
+MD029: false
+
+# Disable blanks around fences — layout constraints
+MD031: false
+
+# Disable heading increment — blog posts may skip heading levels
+MD001: false
+
+# Disable table column style — flexible table formatting
+MD060: false
+
+# Require single trailing newline
+MD047: true
