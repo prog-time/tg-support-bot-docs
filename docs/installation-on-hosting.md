@@ -13,20 +13,14 @@
 
 ## Видеоинструкции
 
-<!-- markdownlint-disable MD033 MD013 -->
-<div style="display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap;">
+<!-- markdownlint-disable MD033 -->
+<div class="video-buttons">
   <a href="https://rutube.ru/video/818c80cef1136db2aa508635b130cb11/"
-     target="_blank"
-     style="display: inline-block; padding: 8px 16px; background: var(--vp-button-brand-bg); color: var(--vp-button-brand-text); border-radius: 20px; font-weight: 500; text-decoration: none;">
-    ▶ Rutube
-  </a>
+     class="but_video but_video_rutube" target="_blank">Rutube</a>
   <a href="https://vkvideo.ru/video-141526561_456239135"
-     target="_blank"
-     style="display: inline-block; padding: 8px 16px; background: var(--vp-button-alt-bg); color: var(--vp-button-alt-text); border-radius: 20px; font-weight: 500; text-decoration: none;">
-    ▶ VK Видео
-  </a>
+     class="but_video but_video_vk" target="_blank">VK Видео</a>
 </div>
-<!-- markdownlint-enable MD033 MD013 -->
+<!-- markdownlint-enable MD033 -->
 
 ::: warning Исправление к видеоинструкции
 В видео упоминается ключ **secret_key** — это ошибка.
