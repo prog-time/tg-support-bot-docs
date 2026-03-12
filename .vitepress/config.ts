@@ -1,27 +1,30 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Telegram Support Bot',
-  description: 'Документация для Telegram бота поддержки клиентов',
+  title: 'TG Support Bot',
+  description: 'Документация для мультиканального бота технической поддержки',
   lang: 'ru-RU',
   base: '/',
 
   sitemap: {
     hostname: 'https://docs.tg-support-bot.ru',
+    transformItems(items) {
+      return items.filter(item => !item.url.includes('.en'))
+    },
   },
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     ['meta', { name: 'theme-color', content: '#0088cc' }],
   ],
 
   themeConfig: {
-    logo: { src: '/logo.svg', width: 24, height: 24 },
+    logo: { src: '/favicon.ico', width: 24, height: 24 },
 
     nav: [
       { text: 'Главная', link: '/' },
       { text: 'Документация', link: '/docs/getting-started' },
-      { text: 'Конфигурация', link: '/docs/configuration' },
     ],
 
     sidebar: {
@@ -31,7 +34,6 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Введение', link: '/docs/getting-started' },
-            { text: 'Конфигурация', link: '/docs/configuration' },
           ],
         },
         {
@@ -43,29 +45,77 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Справочник',
+          text: 'Возможности',
           collapsed: false,
           items: [
-            { text: 'Параметры конфигурации', link: '/docs/configuration#основные-параметры' },
-            { text: 'Настройки Telegram', link: '/docs/configuration#настройки-telegram' },
-            { text: 'Настройки базы данных', link: '/docs/configuration#настройки-базы-данных' },
+            { text: 'Интерактивные кнопки', link: '/docs/interactive-buttons' },
           ],
         },
+        {
+          text: 'Каналы',
+          collapsed: false,
+          items: [
+            { text: 'Подключение Max (VK)', link: '/docs/max-bot' },
+            { text: 'Виджет живого чата', link: '/docs/live-chat-widget' },
+            { text: 'Подключение группы VK', link: '/docs/vk-group' },
+          ],
+        },
+        {
+          text: 'Панель управления',
+          collapsed: false,
+          items: [
+            { text: 'Admin Panel', link: '/docs/admin-panel' },
+          ],
+        },
+        {
+          text: 'Сервисы',
+          collapsed: false,
+          items: [
+            { text: 'Настройка Grafana', link: '/docs/grafana-setup' },
+            { text: 'Настройка PgAdmin', link: '/docs/pgadmin-setup' },
+          ],
+        },
+        {
+          text: 'AI интеграция',
+          collapsed: false,
+          items: [
+            { text: 'Подключение AI-помощника', link: '/docs/ai-integration' },
+            { text: 'Подключение DeepSeek', link: '/docs/ai-deepseek' },
+            { text: 'Подключение GigaChat', link: '/docs/ai-gigachat' },
+            { text: 'Подключение OpenAI', link: '/docs/ai-openai' },
+          ],
+        },
+        {
+          text: 'Обслуживание',
+          collapsed: false,
+          items: [
+            { text: 'Обновление проекта', link: '/docs/update' },
+            { text: 'Чек-лист проверки', link: '/docs/health-checklist' },
+            { text: 'Типичные ошибки', link: '/docs/troubleshooting' },
+          ],
+        },
+        {
+          text: 'Разработка',
+          collapsed: false,
+          items: [
+            { text: 'Webhook через Cloudflare Tunnel (macOS)', link: '/docs/cloudflare-tunnel-webhook-macos' },
+          ],
+        }
       ],
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-org/tg-support-bot' },
-      { icon: 'telegram', link: 'https://t.me/tg_support_bot' },
+      { icon: 'github', link: 'https://github.com/prog-time/tg-support-bot' },
+      { icon: 'telegram', link: 'https://t.me/pt_tg_support' },
     ],
 
     footer: {
       message: 'Выпущено под лицензией MIT.',
-      copyright: '© 2024–2026 Telegram Support Bot',
+      copyright: '© 2024–2026 TG Support Bot',
     },
 
     editLink: {
-      pattern: 'https://github.com/your-org/tg-support-bot/edit/main/docs/:path',
+      pattern: 'https://github.com/prog-time/tg-support-bot/edit/main/docs/:path',
       text: 'Редактировать эту страницу на GitHub',
     },
 
