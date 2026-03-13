@@ -1,185 +1,191 @@
 # Конфигурация
 
-Telegram Support Bot настраивается через файл `.env` в корне проекта или через переменные окружения на вашем сервере. Все параметры сгруппированы по разделам.
-
-## Файл конфигурации
-
+TG Support Bot настраивается через файл `.env` в корне проекта.
 При первом запуске скопируйте шаблон:
 
 ```bash
 cp .env.example .env
 ```
 
-Файл `.env` использует стандартный формат `KEY=VALUE`. Строки, начинающиеся с `#`, являются комментариями.
+Файл `.env` использует стандартный формат `KEY=VALUE`.
+Строки, начинающиеся с `#`, являются комментариями.
 
-::: tip Приоритет настроек
-Переменные окружения системы имеют приоритет над значениями из файла `.env`. Это позволяет переопределять настройки в Docker/Kubernetes без изменения файла.
+:::tip Новые переменные после обновления
+После каждого обновления сравните `.env.example` с вашим `.env` —
+в новом релизе могут появиться новые переменные.
+Подробнее: [Обновление проекта](/docs/update).
 :::
 
-## Основные параметры
+## Приложение
 
-| Параметр | Описание | По умолчанию | Пример |
-|---|---|---|---|
-| `BOT_TOKEN` | Токен Telegram-бота (обязательно) | — | `1234567890:ABCdef...` |
-| `BOT_NAME` | Отображаемое имя бота | `Support Bot` | `Служба поддержки` |
-| `ADMIN_CHAT_ID` | ID Telegram-чата администратора | — | `123456789` |
-| `LOG_LEVEL` | Уровень логирования | `info` | `debug`, `info`, `warn`, `error` |
-| `NODE_ENV` | Режим работы | `production` | `development`, `production` |
-| `PORT` | HTTP-порт приложения | `3000` | `8080` |
-| `SECRET_KEY` | Секретный ключ для подписи сессий | — | `your-random-secret` |
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `APP_NAME` | Название приложения; используется в виджете живого чата | `TG Support Bot` |
+| `APP_URL` | Публичный URL приложения | `https://your-domain.com` |
+| `APP_KEY` | Ключ шифрования Laravel. Генерируется командой `php artisan key:generate` | `base64:...` |
+| `MAIN_DOMAIN` | Основной домен, используемый ботом и всеми его сервисами | `your-domain.com` |
 
-```dotenv
-# Основные параметры
-BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrSTUvwxYZ
-BOT_NAME=Служба поддержки
-ADMIN_CHAT_ID=123456789
-LOG_LEVEL=info
-NODE_ENV=production
-PORT=3000
-SECRET_KEY=super-secret-key-change-me
-```
-
-## Настройки Telegram
-
-Определяют способ получения обновлений от Telegram: polling (для разработки) или webhook (для продакшна).
-
-| Параметр | Описание | По умолчанию | Пример |
-|---|---|---|---|
-| `TELEGRAM_MODE` | Режим получения обновлений | `polling` | `polling`, `webhook` |
-| `WEBHOOK_URL` | Публичный URL для webhook | — | `https://bot.example.com` |
-| `WEBHOOK_PORT` | Порт для приёма webhook-запросов | `8443` | `443`, `8443` |
-| `WEBHOOK_PATH` | Путь для webhook endpoint | `/webhook` | `/tg-webhook` |
-| `POLLING_INTERVAL` | Интервал опроса в мс (polling-режим) | `1000` | `500` |
-| `POLLING_TIMEOUT` | Таймаут long-polling в секундах | `30` | `60` |
-
-```dotenv
-# Webhook (продакшн)
-TELEGRAM_MODE=webhook
-WEBHOOK_URL=https://support.your-domain.com
-WEBHOOK_PORT=8443
-WEBHOOK_PATH=/webhook
-
-# Polling (разработка)
-# TELEGRAM_MODE=polling
-# POLLING_INTERVAL=1000
-# POLLING_TIMEOUT=30
-```
-
-::: warning Webhook и SSL
-Telegram требует HTTPS для webhook. Убедитесь, что у вашего домена есть действующий SSL-сертификат. Поддерживаются порты: 443, 80, 88, 8443.
-:::
-
-## Настройки базы данных
-
-Бот поддерживает PostgreSQL (рекомендуется для продакшна) и SQLite (для разработки).
-
-| Параметр | Описание | По умолчанию | Пример |
-|---|---|---|---|
-| `DB_TYPE` | Тип базы данных | `sqlite` | `sqlite`, `postgres` |
-| `DB_PATH` | Путь к файлу SQLite | `./data/support.db` | `/var/data/bot.db` |
-| `DB_HOST` | Хост PostgreSQL | `localhost` | `db.example.com` |
-| `DB_PORT` | Порт PostgreSQL | `5432` | `5432` |
-| `DB_NAME` | Имя базы данных | `support_bot` | `tg_support` |
-| `DB_USER` | Пользователь БД | `postgres` | `bot_user` |
-| `DB_PASSWORD` | Пароль пользователя БД | — | `strong-password` |
-| `DB_POOL_MIN` | Минимум соединений в пуле | `2` | `2` |
-| `DB_POOL_MAX` | Максимум соединений в пуле | `10` | `20` |
-
-### PostgreSQL (продакшн)
-
-```dotenv
-DB_TYPE=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=support_bot
-DB_USER=bot_user
-DB_PASSWORD=your-secure-password
-DB_POOL_MIN=2
-DB_POOL_MAX=10
-```
-
-### SQLite (разработка)
-
-```dotenv
-DB_TYPE=sqlite
-DB_PATH=./data/support.db
-```
-
-## Настройки уведомлений
-
-Управляют тем, в каких случаях и куда отправляются уведомления операторам и администраторам.
-
-| Параметр | Описание | По умолчанию | Пример |
-|---|---|---|---|
-| `NOTIFY_ON_NEW_TICKET` | Уведомлять при новом тикете | `true` | `true`, `false` |
-| `NOTIFY_ON_RESOLVE` | Уведомлять при закрытии тикета | `true` | `true`, `false` |
-| `NOTIFY_ON_REASSIGN` | Уведомлять при переназначении | `false` | `true`, `false` |
-| `NOTIFY_CHAT_ID` | ID чата для уведомлений (группа/канал) | — | `-1001234567890` |
-| `NOTIFY_MENTION_OPERATOR` | Упоминать оператора в уведомлении | `true` | `true`, `false` |
-| `NOTIFY_QUIET_HOURS_START` | Начало тихого режима (HH:MM) | — | `22:00` |
-| `NOTIFY_QUIET_HOURS_END` | Конец тихого режима (HH:MM) | — | `08:00` |
-
-```dotenv
-# Настройки уведомлений
-NOTIFY_ON_NEW_TICKET=true
-NOTIFY_ON_RESOLVE=true
-NOTIFY_ON_REASSIGN=false
-NOTIFY_CHAT_ID=-1001234567890
-NOTIFY_MENTION_OPERATOR=true
-
-# Тихий режим — уведомления не отправляются с 22:00 до 08:00
-NOTIFY_QUIET_HOURS_START=22:00
-NOTIFY_QUIET_HOURS_END=08:00
-```
-
-## Полный пример .env
-
-```dotenv
-# =====================
-# Основные параметры
-# =====================
-BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrSTUvwxYZ
-BOT_NAME=Служба поддержки
-ADMIN_CHAT_ID=123456789
-LOG_LEVEL=info
-NODE_ENV=production
-PORT=3000
-SECRET_KEY=change-this-to-random-string
-
-# =====================
-# Telegram
-# =====================
-TELEGRAM_MODE=webhook
-WEBHOOK_URL=https://support.your-domain.com
-WEBHOOK_PORT=8443
-WEBHOOK_PATH=/webhook
-
-# =====================
-# База данных
-# =====================
-DB_TYPE=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=support_bot
-DB_USER=bot_user
-DB_PASSWORD=your-secure-password
-
-# =====================
-# Уведомления
-# =====================
-NOTIFY_ON_NEW_TICKET=true
-NOTIFY_ON_RESOLVE=true
-NOTIFY_CHAT_ID=-1001234567890
-NOTIFY_QUIET_HOURS_START=22:00
-NOTIFY_QUIET_HOURS_END=08:00
-```
-
-## Валидация конфигурации
-
-Проверьте корректность настроек без запуска бота:
+:::warning APP_KEY обязателен
+Если `APP_KEY` не задан, Laravel не запустится. Сгенерируйте его командой:
 
 ```bash
-npm run config:validate
+php artisan key:generate
 ```
 
-Команда выведет список всех параметров, их значения и предупреждения о неправильных или отсутствующих значениях.
+:::
+
+## Telegram
+
+:::tip Подробнее о настройке
+Пошаговая установка вебхука описана в разделе
+[Установка через Docker Compose](/docs/installation-on-docker-compose).
+Для локальной разработки — [Webhook через Cloudflare Tunnel (macOS)](/docs/cloudflare-tunnel-webhook-macos).
+:::
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `TELEGRAM_BOT_TOKEN` | Токен основного Telegram-бота, полученный от [@BotFather](https://t.me/BotFather) | `1234567890:ABCdef...` |
+| `TELEGRAM_SECRET_KEY` | Секретный ключ для верификации вебхук-запросов от Telegram (параметр `secret_token`) | `your-random-secret` |
+| `TELEGRAM_GROUP_ID` | ID приватной Telegram-группы с топиками, куда пересылаются обращения | `-1001234567890` |
+| `TELEGRAM_AI_BOT_TOKEN` | Токен отдельного бота, от имени которого AI-помощник отправляет ответы | `9876543210:XYZabc...` |
+
+:::info Регистрация вебхука
+После указания `TELEGRAM_BOT_TOKEN` и `TELEGRAM_SECRET_KEY` зарегистрируйте вебхук,
+открыв в браузере:
+
+```text
+https://api.telegram.org/bot{ТОКЕН}/setWebhook?url=https://{ДОМЕН}/api/telegram/bot&max_connections=45&drop_pending_updates=true&secret_token={СЕКРЕТНЫЙ_КЛЮЧ}
+```
+
+:::
+
+## VK (ВКонтакте)
+
+:::tip Подробнее о настройке
+Полная инструкция по подключению группы VK: [Подключение группы VK](/docs/vk-group).
+:::
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `VK_TOKEN` | Ключ доступа группы ВКонтакте | `vk1.a.AbCdEf...` |
+| `VK_CONFIRM_CODE` | Строка подтверждения из настроек Callback API ВКонтакте | `a1b2c3d4` |
+| `VK_SECRET_CODE` | Произвольный секретный ключ для верификации запросов от ВКонтакте | `my-vk-secret` |
+
+## Max
+
+:::tip Подробнее о настройке
+Полная инструкция по подключению Max: [Подключение Max](/docs/max-bot).
+:::
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `MAX_TOKEN` | Токен бота платформы Max | `your_max_bot_token` |
+| `MAX_SECRET_KEY` | Произвольная строка для верификации вебхук-запросов от Max (передаётся в заголовке `X-Max-Bot-Api-Secret`) | `my-max-secret` |
+
+## База данных
+
+Значения из `.env` используются при настройке подключения в PgAdmin.
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `PGADMIN_EMAIL` | Email для входа в веб-интерфейс PgAdmin | `admin@example.com` |
+| `PGADMIN_PASSWORD` | Пароль для входа в веб-интерфейс PgAdmin | `strongpassword` |
+
+:::tip Настройка PgAdmin
+Подробная инструкция по подключению к базе данных через PgAdmin:
+[Настройка PgAdmin](/docs/pgadmin-setup).
+:::
+
+## AI-помощник
+
+:::tip Подробнее о настройке
+Базовая настройка AI-помощника: [Подключение AI-помощника](/docs/ai-integration).
+Инструкции по конкретным провайдерам:
+[OpenAI](/docs/ai-openai) · [DeepSeek](/docs/ai-deepseek) · [GigaChat](/docs/ai-gigachat).
+:::
+
+### Общие параметры
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `AI_ENABLED` | Включает (`true`) или отключает (`false`) AI-помощника | `true` |
+| `AI_DEFAULT_PROVIDER` | Провайдер, используемый по умолчанию | `openai`, `deepseek`, `gigachat` |
+
+### OpenAI
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | API-ключ OpenAI | `sk-...` |
+| `OPENAI_BASE_URL` | Базовый URL API | `https://api.openai.com/v1` |
+| `OPENAI_MODEL` | Используемая модель | `gpt-4o-mini` |
+| `OPENAI_MAX_TOKENS` | Максимальное количество токенов в одном ответе | `2000` |
+| `OPENAI_TEMPERATURE` | Степень креативности: `0` — строго, `1` — творчески | `0.7` |
+
+### DeepSeek
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `DEEPSEEK_CLIENT_SECRET` | API-ключ DeepSeek | `sk-...` |
+| `DEEPSEEK_BASE_URL` | Базовый URL API | `https://api.deepseek.com/chat/completions` |
+| `DEEPSEEK_MODEL` | Используемая модель | `deepseek-chat` |
+| `DEEPSEEK_MAX_TOKENS` | Максимальное количество токенов в одном ответе | `1000` |
+| `DEEPSEEK_TEMPERATURE` | Степень креативности: `0` — строго, `1` — творчески | `0.7` |
+
+### GigaChat
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `GIGACHAT_CLIENT_SECRET` | Authorization key из личного кабинета GigaChat | `ваш_authorization_key` |
+| `GIGACHAT_BASE_URL` | Базовый URL API | `https://gigachat.devices.sberbank.ru/api/v1` |
+| `GIGACHAT_CLIENT_ID` | Client ID из личного кабинета GigaChat | `ваш_client_id` |
+| `GIGACHAT_MODEL` | Используемая модель | `GigaChat-2-Max` |
+| `GIGACHAT_MAX_TOKENS` | Максимальное количество токенов в одном ответе | `1000` |
+| `GIGACHAT_TEMPERATURE` | Степень креативности: `0` — строго, `1` — творчески | `0.7` |
+| `GIGACHAT_CERT_PATH` | Путь к сертификату Минцифры относительно директории `storage` | `certs/russian_trusted_root_ca_pem.crt` |
+
+:::info Сертификат GigaChat
+GigaChat требует сертификат безопасности от Минцифры России.
+Поместите файл `.crt` в директорию `storage/certs`.
+Подробнее: [Подключение GigaChat](/docs/ai-gigachat).
+:::
+
+## Виджет живого чата
+
+:::tip Подробнее о настройке
+Полная инструкция по подключению виджета: [Виджет живого чата](/docs/live-chat-widget).
+:::
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `API_TOKEN` | API-ключ, сгенерированный для источника `live_chat` | `токен из artisan app:generate-token` |
+| `ALLOWED_ORIGINS` | Домены, на которых размещён виджет (несколько через запятую) | `https://example.com,https://shop.example.com` |
+| `VITE_APP_NAME` | Имя приложения для сборки Vite; обычно ссылается на `$APP_NAME` | `"${APP_NAME}"` |
+
+:::warning Только Docker Compose
+Виджет живого чата доступен только при развёртывании через Docker Compose,
+так как требует Node.js в отдельном контейнере.
+:::
+
+## Мониторинг
+
+### Grafana
+
+:::tip Настройка Grafana
+Подробная инструкция: [Настройка Grafana](/docs/grafana-setup).
+Grafana доступна по адресу `https://grafana.{ваш_домен}`.
+:::
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `GRAFANA_USER` | Имя пользователя для входа в Grafana | `admin` |
+| `GRAFANA_PASSWORD` | Пароль для входа в Grafana | `strongpassword` |
+
+## Интерфейс менеджера
+
+| Параметр | Описание | Пример |
+| --- | --- | --- |
+| `MANAGER_INTERFACE` | Режим работы интерфейса менеджера: `admin_panel` — ответы через веб-панель `/admin`; `telegram_group` — ответы через Telegram-группу | `admin_panel` |
+
+:::info Подробнее о режимах
+Описание отличий режимов `admin_panel` и `telegram_group`: [Admin Panel](/docs/admin-panel).
+:::
