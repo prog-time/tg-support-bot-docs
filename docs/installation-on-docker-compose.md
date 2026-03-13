@@ -8,11 +8,11 @@
 <!-- markdownlint-disable MD033 -->
 <div class="video-buttons">
   <a href="https://youtu.be/ZAtP9qJ5q9M"
-     class="but_video but_video_youtube" target="_blank">YouTube</a>
+     class="but-video but-video-youtube" target="_blank">YouTube</a>
   <a href="https://rutube.ru/video/70b393db88e0a92ab902a9b51e78c7e3/"
-     class="but_video but_video_rutube" target="_blank">Rutube</a>
+     class="but-video but-video-rutube" target="_blank">Rutube</a>
   <a href="https://vkvideo.ru/video-141526561_456239136"
-     class="but_video but_video_vk" target="_blank">VK Видео</a>
+     class="but-video but-video-vk" target="_blank">VK Видео</a>
 </div>
 <!-- markdownlint-enable MD033 -->
 

@@ -1,0 +1,47 @@
+.video-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.but-video {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: var(--vp-button-alt-bg);
+  color: #fff !important;
+  transition: background 0.2s;
+  text-decoration: none !important;
+}
+
+.but-video:hover {
+  text-decoration: none;
+  background: var(--vp-button-alt-hover-bg);
+  color: #fff;
+}
+
+.but-video-youtube {
+  background: #f00;
+}
+
+.but-video-youtube:hover {
+  background: #c00;
+}
+
+.but-video-rutube {
+  background: #1a1a1a;
+}
+
+.but-video-rutube:hover {
+  background: #333;
+}
+
+.but-video-vk {
+  background: #07f;
+}
+
+.but-video-vk:hover {
+  background: #0060cc;
+}

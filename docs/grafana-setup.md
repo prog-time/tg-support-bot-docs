@@ -13,7 +13,7 @@ Docker-контейнера. Теперь Grafana работает на отде
 <!-- markdownlint-disable MD033 -->
 <div class="video-buttons">
   <a href="https://youtu.be/vfG9U_Hifhc"
-     class="but_video but_video_youtube" target="_blank">YouTube</a>
+     class="but-video but-video-youtube" target="_blank">YouTube</a>
 </div>
 <!-- markdownlint-enable MD033 -->
 

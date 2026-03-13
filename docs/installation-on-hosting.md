@@ -16,9 +16,9 @@
 <!-- markdownlint-disable MD033 -->
 <div class="video-buttons">
   <a href="https://rutube.ru/video/818c80cef1136db2aa508635b130cb11/"
-     class="but_video but_video_rutube" target="_blank">Rutube</a>
+     class="but-video but-video-rutube" target="_blank">Rutube</a>
   <a href="https://vkvideo.ru/video-141526561_456239135"
-     class="but_video but_video_vk" target="_blank">VK Видео</a>
+     class="but-video but-video-vk" target="_blank">VK Видео</a>
 </div>
 <!-- markdownlint-enable MD033 -->
 
