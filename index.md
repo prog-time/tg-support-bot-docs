@@ -5,9 +5,6 @@ hero:
   name: "TG Support Bot"
   text: "Мультиканальная поддержка клиентов"
   tagline: "Принимайте обращения из Telegram, VK, Max и сайта — всё в одной Telegram-группе с топиками. Просто, надёжно, без лишнего ПО."
-  image:
-    src: /preview.png
-    alt: TG Support Bot
   actions:
     - theme: brand
       text: Начать работу
