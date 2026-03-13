@@ -104,7 +104,7 @@ export default defineConfig({
         },
 
         editLink: {
-          pattern: 'https://github.com/prog-time/tg-support-bot/edit/main/docs/:path',
+          pattern: 'https://github.com/prog-time/tg-support-bot-docs/edit/main/:path',
           text: 'Редактировать эту страницу на GitHub',
         },
 
@@ -222,7 +222,7 @@ export default defineConfig({
         },
 
         editLink: {
-          pattern: 'https://github.com/prog-time/tg-support-bot/edit/main/docs/:path',
+          pattern: 'https://github.com/prog-time/tg-support-bot-docs/edit/main/:path',
           text: 'Edit this page on GitHub',
         },
 
