@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'TG Support Bot',
   base: '/',
+  srcExclude: ['**/node_modules/**', 'tasks/**'],
 
   sitemap: {
     hostname: 'https://docs.tg-support-bot.ru',
