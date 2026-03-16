@@ -112,7 +112,9 @@ docker exec pet php artisan tinker --execute="echo \App\Models\ExternalSource::f
 Создание через artisan:
 
 ```bash
-docker exec pet php artisan app:create-admin-user
+docker exec app bash
+
+php artisan app:create-admin-user
 ```
 
 :::tip
@@ -136,7 +138,9 @@ docker exec pet php artisan app:create-admin-user
 перезапущен. Убедиться в текущем значении:
 
 ```bash
-docker exec pet php artisan tinker --execute="echo config('app.manager_interface');"
+docker exec app bash
+
+php artisan tinker --execute="echo config('app.manager_interface');"
 ```
 
 **Новые сообщения не появляются.**
