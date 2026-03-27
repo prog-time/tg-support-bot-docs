@@ -127,7 +127,7 @@ export default defineConfig({
         },
 
         footer: {
-          message: 'Выпущено под лицензией MIT.',
+          message: 'Выпущено под лицензией MIT. Сайт разработал <a href="https://lyashchuk.pro/" target="_blank" rel="noopener noreferrer">Илья Лящук</a>.',
           copyright: '© 2024–2026 TG Support Bot',
         },
       },
@@ -245,7 +245,7 @@ export default defineConfig({
         },
 
         footer: {
-          message: 'Released under the MIT License.',
+          message: 'Released under the MIT License. Site developed by <a href="https://lyashchuk.pro/" target="_blank" rel="noopener noreferrer">Ilya Lyashchuk</a>.',
           copyright: '© 2024–2026 TG Support Bot',
         },
       },
