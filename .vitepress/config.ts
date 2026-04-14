@@ -13,6 +13,13 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     ['meta', { name: 'theme-color', content: '#0088cc' }],
+    ['meta', { name: 'yandex-verification', content: 'c539d97b405ce8ba' }],
+    [
+      'script',
+      { type: 'text/javascript' },
+      `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103860702', 'ym');ym(103860702, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`,
+    ],
+    ['noscript', {}, '<div><img src="https://mc.yandex.ru/watch/103860702" style="position:absolute; left:-9999px;" alt="" /></div>'],
   ],
 
   locales: {
