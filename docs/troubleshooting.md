@@ -4,6 +4,21 @@
 и эксплуатации TG Support Bot, — с описанием причин и конкретными шагами для
 их устранения.
 
+## Слетают настройки хука
+
+Если после подключения хука, через пару дней перестаёт работать бот, 
+возможно проблемы связаны с блокировками IP адреса VPS со стороны Telegram.
+
+Попробуйте сделать следующее:
+1. Удалить существующие хуки
+```text
+https://api.telegram.org/bot{{TELEGRAM_TOKEN}}/deleteWebhook?drop_pending_updates=true
+```
+2. Подключить hook с указанием IP адреса VPS. Пример полного запроса.
+```text
+https://api.telegram.org/bot{{TELEGRAM_TOKEN}}/setWebhook?url={{TELEGRAM_WEBHOOK}}&max_connections=45&drop_pending_updates=true&secret_token={{TELEGRAM_SECRET_KEY}}&ip_address=111.222.33.44
+```
+
 ## Не удаётся настроить SSL-сертификат
 
 Certbot или другой ACME-клиент не может получить сертификат, потому что порт 80
