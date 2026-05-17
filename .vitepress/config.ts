@@ -49,6 +49,7 @@ export default defineConfig({
               items: [
                 { text: 'Установка на хостинг', link: '/docs/installation-on-hosting' },
                 { text: 'Установка через Docker Compose', link: '/docs/installation-on-docker-compose' },
+                { text: 'Несколько ботов на одном сервере', link: '/docs/multi-instance-deployment' },
               ],
             },
             {
@@ -167,6 +168,7 @@ export default defineConfig({
               items: [
                 { text: 'Installation on a Hosting Server', link: '/en/docs/installation-on-hosting' },
                 { text: 'Installation via Docker Compose', link: '/en/docs/installation-on-docker-compose' },
+                { text: 'Multiple Bots on a Single Server', link: '/en/docs/multi-instance-deployment' },
               ],
             },
             {
