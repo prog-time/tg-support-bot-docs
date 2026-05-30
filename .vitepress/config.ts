@@ -63,6 +63,7 @@ export default defineConfig({
               text: 'Каналы',
               collapsed: false,
               items: [
+                { text: 'Подключение Telegram', link: '/docs/telegram-bot' },
                 { text: 'Подключение Max (VK)', link: '/docs/max-bot' },
                 { text: 'Виджет живого чата', link: '/docs/live-chat-widget' },
                 { text: 'Подключение группы VK', link: '/docs/vk-group' },
@@ -182,6 +183,7 @@ export default defineConfig({
               text: 'Channels',
               collapsed: false,
               items: [
+                { text: 'Connecting Telegram', link: '/en/docs/telegram-bot' },
                 { text: 'Connecting Max (VK)', link: '/en/docs/max-bot' },
                 { text: 'Live Chat Widget', link: '/en/docs/live-chat-widget' },
                 { text: 'Connecting a VK Group', link: '/en/docs/vk-group' },
