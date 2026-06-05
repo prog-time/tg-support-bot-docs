@@ -54,6 +54,7 @@ Max не имеет веб-интерфейса для регистрации в
 
 ```bash
 curl -X POST "https://platform-api.max.ru/subscriptions" \
+  -H "Authorization: YOUR_MAX_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://ВАШ_ДОМЕН/api/max/bot",
