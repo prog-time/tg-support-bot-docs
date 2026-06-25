@@ -3,6 +3,8 @@
 Эта инструкция описывает настройку GigaChat в качестве AI-провайдера
 для TG Support Bot.
 
+Можно выбрать только одного провайдера для работы с ИИ-ассистентом.
+
 ::: tip
 Перед настройкой убедитесь, что AI-помощник подключён согласно
 [базовой инструкции](/docs/ai-integration).
@@ -26,35 +28,15 @@
 
 После загрузки поместите файл `.crt` в директорию `storage/certs`.
 
-## Настройка параметров в .env
+## Подключение провайдера
 
-Добавьте или обновите следующие переменные в файле `.env`:
+Перейдите в раздел **"ИИ-ассистент"** и нажмите на карточку **GigaChat**.
 
-```env
-GIGACHAT_CLIENT_SECRET=ваш_authorization_key
-GIGACHAT_BASE_URL=https://gigachat.devices.sberbank.ru/api/v1
-GIGACHAT_CLIENT_ID=ваш_client_id
-GIGACHAT_MODEL=GigaChat-2-Max
-GIGACHAT_MAX_TOKENS=1000
-GIGACHAT_TEMPERATURE=0.7
-GIGACHAT_CERT_PATH="certs/russian_trusted_root_ca_pem.crt"
-```
-
-| Переменная                 | Описание                                                                     |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| `GIGACHAT_CLIENT_SECRET`   | Authorization key из личного кабинета GigaChat                               |
-| `GIGACHAT_BASE_URL`        | Базовый URL API — всегда `https://gigachat.devices.sberbank.ru/api/v1`       |
-| `GIGACHAT_CLIENT_ID`       | Client ID из личного кабинета GigaChat                                       |
-| `GIGACHAT_MODEL`           | Используемая модель (на текущий момент доступна `GigaChat-2-Max`)            |
-| `GIGACHAT_MAX_TOKENS`      | Максимальное количество токенов в одном ответе                               |
-| `GIGACHAT_TEMPERATURE`     | Степень креативности: `0` — строго, `1` — творчески                         |
-| `GIGACHAT_CERT_PATH`       | Путь к сертификату относительно директории `storage` (например, `certs/russian_trusted_root_ca_pem.crt`) |
-
-## Включение GigaChat
-
-Укажите GigaChat в качестве провайдера по умолчанию в файле `.env`:
-
-```env
-AI_ENABLED=true
-AI_DEFAULT_PROVIDER=gigachat
-```
+Заполните форму:
+- Client ID
+- Client Secret
+- Base URL провайдера
+- Модель
+- Макс. токенов ответа
+- Температура
+- Сертификат (CA)
