@@ -33,5 +33,5 @@ features:
 
   - icon: 📦
     title: Готовый Docker Compose
-    details: Один запуск — и работают Laravel, Node.js, PostgreSQL, Redis, Nginx с SSL, Grafana и Loki. Мониторинг и логирование из коробки.
+    details: Один запуск — и работают Laravel, PostgreSQL, Nginx с SSL. Всё необходимое из коробки.
 ---

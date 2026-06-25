@@ -33,5 +33,5 @@ features:
 
   - icon: 📦
     title: Ready-to-use Docker Compose
-    details: One command — and Laravel, Node.js, PostgreSQL, Redis, Nginx with SSL, Grafana, and Loki are all running. Monitoring and logging out of the box.
+    details: One command — and Laravel, PostgreSQL, Nginx with SSL are all running. Everything you need out of the box.
 ---
