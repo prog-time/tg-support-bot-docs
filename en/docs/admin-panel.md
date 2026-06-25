@@ -5,7 +5,7 @@ Managers work in a browser instead of a Telegram group. Built on Filament 3.
 
 ## Access
 
-Panel URL: `https://<your-domain>/admin`
+Panel URL: `https://{ваш домен}/admin`
 
 Login requires an account from the `users` table.
 
