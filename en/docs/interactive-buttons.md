@@ -1,7 +1,7 @@
 # Interactive Buttons
 
-A manager can insert buttons directly into the reply text — no code configuration
-needed, just a simple syntax using double square brackets.
+A manager can insert buttons directly into the reply text — with no code setup,
+using a simple syntax inside double square brackets.
 
 ## Syntax
 
@@ -35,7 +35,7 @@ Multiple buttons on the same line without a line break are displayed in a single
 | `url` | Open a link in the browser | `https://example.com` |
 | `phone` | Dial a phone number | `+79001234567` |
 | `callback` | Send callback data to the bot | `confirm` |
-| `pay` | Payment button (Telegram only) | — |
+| `pay` | Payment button (Telegram) | — |
 
 A button without a type creates a reply keyboard element with arbitrary text.
 
@@ -50,6 +50,6 @@ A button without a type creates a reply keyboard element with arbitrary text.
 | External API | + | + | + |
 
 ::: info
-Buttons are automatically removed from the message text before delivery to the client.
+Buttons are automatically removed from the message text before it is sent to the client.
 Inline buttons (`url`, `callback`) take priority over reply keyboard buttons.
 :::
