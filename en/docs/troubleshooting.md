@@ -22,25 +22,6 @@ sudo systemctl stop nginx
 
 Then re-run the certificate issuance command.
 
-## Grafana Fails to Start Due to Permission Error
-
-The `grafana` container exits immediately because the data directory is not
-writable by the Grafana process.
-
-Output of `docker compose logs grafana`:
-
-```text
-grafana  | GF_PATHS_DATA='/var/lib/grafana' is not writable.
-grafana  | You may have issues with file permissions, more information here: http://docs.grafana.org/installation/docker/#migrate-to-v51-or-later
-grafana  | mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied
-```
-
-Set the owner of the data directory to UID `472` (Grafana's internal user):
-
-```bash
-sudo chown -R 472:472 ./docker/grafana
-```
-
 ## Error: Failed to open stream: Permission denied
 
 Laravel cannot write to the log file because the application does not have
