@@ -175,9 +175,9 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Connecting Telegram', link: '/en/docs/telegram-bot' },
-                { text: 'Connecting Max (VK)', link: '/en/docs/max-bot' },
-                { text: 'Live Chat Widget', link: '/en/docs/live-chat-widget' },
+                { text: 'Connecting Max', link: '/en/docs/max-bot' },
                 { text: 'Connecting a VK Group', link: '/en/docs/vk-group' },
+                { text: 'Live Chat Widget', link: '/en/docs/live-chat-widget' },
               ],
             },
             {
@@ -202,7 +202,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Updating the Project', link: '/en/docs/update' },
-                { text: 'Health Checklist', link: '/en/docs/health-checklist' },
                 { text: 'Troubleshooting', link: '/en/docs/troubleshooting' },
               ],
             },
