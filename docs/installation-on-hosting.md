@@ -11,22 +11,6 @@
 в файле `.env`.
 :::
 
-## Видеоинструкции
-
-<!-- markdownlint-disable MD033 -->
-<div class="video-buttons">
-  <a href="https://rutube.ru/video/818c80cef1136db2aa508635b130cb11/"
-     class="but-video but-video-rutube" target="_blank">Rutube</a>
-  <a href="https://vkvideo.ru/video-141526561_456239135"
-     class="but-video but-video-vk" target="_blank">VK Видео</a>
-</div>
-<!-- markdownlint-enable MD033 -->
-
-::: warning Исправление к видеоинструкции
-В видео упоминается ключ **secret_key** — это ошибка.
-Правильное название параметра: **secret_token**.
-:::
-
 ## Клонирование репозитория
 
 Перейдите в директорию проекта и убедитесь, что она пуста:
@@ -69,7 +53,22 @@ cp .env.example .env
 ## Заполнение .env
 
 Откройте файл `.env` и замените значения переменных на реальные данные:
-токен бота, секретный ключ, параметры базы данных и прочее.
+1. Домен
+```text
+MAIN_DOMAIN=example.com
+APP_URL=https://example.com
+```
+2. Доступы к базе данных
+```text
+DB_CONNECTION=pgsql
+DB_HOST=pgdb
+DB_PORT=5432
+DB_DATABASE=database_name
+DB_USERNAME=username
+DB_PASSWORD=password
+```
+
+Параметры для настройки интеграций указываются в административной панели.
 
 ## Применение миграций базы данных
 
@@ -83,8 +82,7 @@ php artisan migrate
 ## Перенаправление запросов в директорию public
 
 ::: tip
-Этот шаг может отличаться в зависимости от вашего хостинга. Если
-настройка не получится, обратитесь в техническую поддержку хостинга
+Этот шаг может отличаться в зависимости от вашего хостинга. Если не получится запустить бота, обратитесь в техническую поддержку хостинга
 или задайте вопрос в нашем Telegram-сообществе —
 [t.me/pt\_tg\_support](https://t.me/pt_tg_support).
 :::
