@@ -1,6 +1,6 @@
 # Развёртывание нескольких копий бота на одном сервере
 
-Системный nginx на хосте + N изолированных Docker-стэков по адресам `/home/botN`. Каждая копия — свой Telegram-токен, домен, БД, Redis.
+Системный nginx на хосте + N изолированных Docker-стэков по адресам `/home/botN`. Каждая копия — свой Telegram-токен, домен, БД.
 
 ## Установка системных пакетов (один раз)
 
@@ -17,11 +17,11 @@ sudo sysctl -p
 
 ## Таблица портов
 
-| Бот | FPM | Postgres | Redis | pgAdmin | Node | Loki | Grafana |
-|-----|-----|----------|-------|---------|------|------|---------|
-| bot1 | 9001 | 5433 | 6380 | 5051 | 3011 | 3110 | 3010 |
-| bot2 | 9002 | 5434 | 6381 | 5052 | 3012 | 3111 | 3011 |
-| bot3 | 9003 | 5435 | 6382 | 5053 | 3013 | 3112 | 3012 |
+| Бот | FPM | Postgres |
+|-----|-----|----------|
+| bot1 | 9001 | 5433 |
+| bot2 | 9002 | 5434 |
+| bot3 | 9003 | 5435 |
 
 Все порты бинятся только на `127.0.0.1`.
 
@@ -51,7 +51,6 @@ services:
         restart: always
         depends_on:
             - pgdb
-            - redis
         env_file:
             - .env
         working_dir: /var/www/
@@ -80,23 +79,11 @@ services:
         networks:
             - pet
     
-    redis:
-        image: redis:latest
-        restart: always
-        ports:
-            - "127.0.0.1:${REDIS_PORT}:6379"
-        environment:
-            - REDIS_PASSWORD=${REDIS_PASSWORD}
-        command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
-        networks:
-            - pet
-    
     queue:
         build: .
         restart: always
         depends_on:
             - app
-            - redis
         env_file:
             - .env
         working_dir: /var/www
@@ -130,7 +117,6 @@ sudo nano /home/botN/.env
 ```env
 APP_FPM_PORT=900N
 PGDB_PORT=543N+2
-REDIS_PORT=638N-1
 
 APP_URL=https://botN.example.com
 DB_HOST=pgdb
@@ -139,24 +125,19 @@ DB_DATABASE=botN
 DB_USERNAME=botN
 DB_PASSWORD=<openssl rand -hex 24>
 
-REDIS_HOST=redis
-REDIS_PORT=6379
-REDIS_PASSWORD=<openssl rand -hex 24>
-
 TELEGRAM_BOT_TOKEN=...
 TELEGRAM_BOT_ID=...
 TELEGRAM_GROUP_ID=...
 TELEGRAM_SECRET_KEY=<openssl rand -hex 24>
 ```
 
-Внутри Docker все сервисы по-прежнему доступны по именам (`pgdb:5432`, `redis:6379`) — не путать с хост-портами.
+Внутри Docker все сервисы по-прежнему доступны по именам (`pgdb:5432`) — не путать с хост-портами.
 
 ### 4. Запуск контейнеров
 
 ```bash
 cd /home/botN
-docker compose build
-docker compose up -d
+docker compose up -d --build
 docker compose ps
 ```
 
@@ -283,15 +264,15 @@ docker compose -f /home/botN/docker-compose.yml logs --tail=20 app queue
 Повторить раздел «Развёртывание копии botN», меняя:
 
 - Папку `/home/botN`
-- Все `900N` / `543N` / `638N` по таблице портов
-- Домен, Telegram-токены, пароли БД и Redis
+- Все `900N` / `543N` по таблице портов
+- Домен, Telegram-токены, пароли БД
 - `server_name`, `root`, `fastcgi_pass`, путь сертификата в nginx-конфиге
 
 ---
 
 ## Возможные ошибки
 
-### `Container "/botN_redis" is already in use`
+### `Container "/botN_pgdb" is already in use`
 Старый контейнер с `container_name`. Убрать `container_name:` из compose, удалить старый:
 ```bash
 docker rm -f $(docker ps -aq --filter "name=botN")
