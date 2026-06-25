@@ -38,24 +38,6 @@ sudo systemctl stop nginx
 
 После этого повторно запустите выпуск сертификата.
 
-## Grafana не запускается из-за ошибки прав доступа
-
-Контейнер `grafana` завершается с ошибкой прав на запись в директорию данных.
-
-Вывод `docker compose logs grafana`:
-
-```text
-grafana  | GF_PATHS_DATA='/var/lib/grafana' is not writable.
-grafana  | You may have issues with file permissions, more information here: http://docs.grafana.org/installation/docker/#migrate-to-v51-or-later
-grafana  | mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied
-```
-
-Назначьте владельцем директории пользователя с UID `472` (внутренний пользователь Grafana):
-
-```bash
-sudo chown -R 472:472 ./docker/grafana
-```
-
 ## Ошибка: Failed to open stream: Permission denied
 
 Laravel не может записать в файл лога из-за недостаточных прав доступа к директории.

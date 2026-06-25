@@ -1,13 +1,12 @@
 # Admin Panel
 
-The `/admin` web panel is an alternative interface for the support team.
-Managers work in a browser instead of a Telegram group. Built on Filament 3.
+The `/admin` web panel is the main interface for the support team.
 
 ## Access
 
-Panel URL: `https://<your-domain>/admin`
+Panel address: `https://{your domain}/admin`
 
-Login requires an account from the `users` table.
+To sign in, you need an account from the `users` table.
 
 Create a new user via artisan:
 
@@ -15,140 +14,61 @@ Create a new user via artisan:
 docker exec pet php artisan app:create-admin-user
 ```
 
-## Panel Sections
+## Panel sections
 
 ### Conversations
 
-Route: `/admin/conversations`
+Route: `/admin/chats`
 
-The main section for handling support requests. Displays a list of all users
-who have messaged the bot.
+The main section for handling support requests. Displays a list of all conversations.
 
-| Column | Description |
-| --- | --- |
-| Chat ID | User identifier on their platform |
-| Platform | `telegram`, `vk`, or an external source |
-| Last Message | Date and time of the last message |
+<!-- markdownlint-disable MD033 -->
+<img width="800" height="fit-content" alt="Authorization on the Max platform" src="/images/admin/1.png" />
+<!-- markdownlint-enable MD033 -->
 
-Filters: by platform (`telegram` / `vk`).
-Default sort: by update date, newest first.
+### Integrations
 
-### Conversation Page
+Route: `/admin/settings/integrations`
 
-Shows the message history with a specific user. Incoming and outgoing messages
-are displayed in chronological order.
+Shows all available integrations. In this section you can connect integrations for your technical support.
 
-In `admin_panel` mode, a reply form is available. To send a reply:
+### AI Assistant
 
-1. Enter text in the «Message» field.
-2. Click the send button.
-3. The reply is saved to the database and delivered to the user via the queue.
+Route: `/admin/settings/ai`
 
-:::tip
-The reply form is hidden when the panel is opened in `telegram_group` mode.
-:::
+AI Assistant settings, which include:
+- connecting and configuring an AI provider
+- AI assistant operation parameters
+- a field for entering the system prompt
 
-### Bot Users
+### API Settings
 
-Route: `/admin/bot-users`
+Route: `/admin/settings/api-webhooks`
 
-A list of all registered bot users with the ability to block them.
+Management of external sources integrated through the REST API.
 
-| Action | Description |
-| --- | --- |
-| Block | Sets `is_banned = true`. The user receives a ban notification instead of a reply |
-| Unblock | Removes the ban (`is_banned = false`) |
+Creating a source:
 
-### External Sources
+1. Click **"Add source"**.
+2. When you click it, a new API source is created automatically.
+3. Fill in the fields:
+   - **"Name"**, which will be displayed in the list of API sources
+   - **"Webhook URL"**, the address to which replies from managers will be sent
 
-Route: `/admin/external-sources`
+### Team
 
-:::info
-This section is only available to administrators (`role = admin`).
-:::
+Route: `/admin/settings/team`
 
-Manage external sources integrated via REST API.
+Management of operators and roles in the support team.
 
-To create a source:
+Creating a user through the panel:
 
-1. Click «New External Source».
-2. Enter a name and (optionally) a «Webhook URL» — the address where replies
-   will be delivered.
-3. Save — an access token is generated automatically.
+1. Go to "Settings → Team".
+2. Click "Add".
+3. Fill in the name, email, password (at least 8 characters), and role.
 
-:::warning
-When saving an existing source, the token is regenerated automatically.
-Any integrations using the old token will stop working — update the token
-on the client side.
-:::
-
-To retrieve the current token for a source:
-
-```bash
-docker exec pet php artisan tinker --execute="echo \App\Models\ExternalSource::find(1)->accessToken->token;"
-```
-
-### Users
-
-Route: `/admin/users` (under the «Settings» group)
-
-:::info
-This section is only available to administrators (`role = admin`).
-:::
-
-Manage login accounts for `/admin`.
-
-| Role | Access |
-| --- | --- |
-| `manager` | Conversations, Bot Users |
-| `admin` | Everything, including Users and External Sources |
-
-To create a user via the panel:
-
-1. Go to «Settings → Users».
-2. Click «New User».
-3. Fill in the name, email, password (minimum 8 characters), and role.
-
-To create a user via artisan:
+Creating via artisan:
 
 ```bash
 docker exec pet php artisan app:create-admin-user
 ```
-
-:::tip
-The command creates a user with the default role. The role can be changed in the panel.
-:::
-
-## Behavior in Different Modes
-
-| Feature | `admin_panel` | `telegram_group` |
-| --- | --- | --- |
-| View messages in `/admin` | Yes | Yes (read-only) |
-| Reply form in `/admin` | Yes | Hidden |
-| Create forum topics in Telegram | No | Yes |
-| New messages saved to DB | Yes | Yes |
-
-## FAQ
-
-**I don't see the reply form.**
-
-Make sure `MANAGER_INTERFACE=admin_panel` is set in `.env` and the container
-has been restarted. To verify the current value:
-
-```bash
-docker exec pet php artisan tinker --execute="echo config('app.manager_interface');"
-```
-
-**New messages are not appearing.**
-
-The page refreshes every 5 seconds. If messages still do not appear after
-10 or more seconds, check whether the queue is running:
-
-```bash
-docker compose ps
-```
-
-**A blocked user is still able to write.**
-
-When a user is blocked via the panel, the ban notification is sent through the
-queue. Make sure the worker is running.

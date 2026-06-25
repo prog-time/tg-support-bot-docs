@@ -64,9 +64,9 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Подключение Telegram', link: '/docs/telegram-bot' },
-                { text: 'Подключение Max (VK)', link: '/docs/max-bot' },
-                { text: 'Виджет живого чата', link: '/docs/live-chat-widget' },
+                { text: 'Подключение Max', link: '/docs/max-bot' },
                 { text: 'Подключение группы VK', link: '/docs/vk-group' },
+                { text: 'Виджет живого чата', link: '/docs/live-chat-widget' },
               ],
             },
             {
@@ -74,14 +74,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Admin Panel', link: '/docs/admin-panel' },
-              ],
-            },
-            {
-              text: 'Сервисы',
-              collapsed: false,
-              items: [
-                { text: 'Настройка Grafana', link: '/docs/grafana-setup' },
-                { text: 'Настройка PgAdmin', link: '/docs/pgadmin-setup' },
               ],
             },
             {
@@ -99,7 +91,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Обновление проекта', link: '/docs/update' },
-                { text: 'Чек-лист проверки', link: '/docs/health-checklist' },
                 { text: 'Типичные ошибки', link: '/docs/troubleshooting' },
               ],
             },
@@ -184,9 +175,9 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Connecting Telegram', link: '/en/docs/telegram-bot' },
-                { text: 'Connecting Max (VK)', link: '/en/docs/max-bot' },
-                { text: 'Live Chat Widget', link: '/en/docs/live-chat-widget' },
+                { text: 'Connecting Max', link: '/en/docs/max-bot' },
                 { text: 'Connecting a VK Group', link: '/en/docs/vk-group' },
+                { text: 'Live Chat Widget', link: '/en/docs/live-chat-widget' },
               ],
             },
             {
@@ -194,14 +185,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Admin Panel', link: '/en/docs/admin-panel' },
-              ],
-            },
-            {
-              text: 'Services',
-              collapsed: false,
-              items: [
-                { text: 'Grafana Setup', link: '/en/docs/grafana-setup' },
-                { text: 'PgAdmin Setup', link: '/en/docs/pgadmin-setup' },
               ],
             },
             {
@@ -219,7 +202,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Updating the Project', link: '/en/docs/update' },
-                { text: 'Health Checklist', link: '/en/docs/health-checklist' },
                 { text: 'Troubleshooting', link: '/en/docs/troubleshooting' },
               ],
             },

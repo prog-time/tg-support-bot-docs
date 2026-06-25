@@ -66,16 +66,12 @@ Cloudflare генерирует новый URL при каждом запуск�
 
 ## Шаг 4 — Формирование URL вебхука
 
-Возьмите значение `secret_token` из файла `.env`:
-
-```env
-TELEGRAM_SECRET_KEY=ваш_секретный_ключ
-```
+На этом этапе вам необходимо придумать пароль для защиты вашей Telegram интеграции.
 
 Сформируйте URL вебхука, подставив свой домен и секретный ключ:
 
 ```
-https://<домен>.trycloudflare.com/api/telegram/bot&max_connections=45&drop_pending_updates=true&secret_token=<секретный_ключ>
+https://{ваш домен}.trycloudflare.com/api/telegram/bot&max_connections=45&drop_pending_updates=true&secret_token={секретный_ключ}
 ```
 
 ## Шаг 5 — Регистрация webhook в Telegram
@@ -83,7 +79,7 @@ https://<домен>.trycloudflare.com/api/telegram/bot&max_connections=45&drop_
 Откройте в браузере следующий URL, подставив токен бота и URL из шага 4:
 
 ```
-https://api.telegram.org/bot<ТОКЕН>/setWebhook?url=https://<домен>.trycloudflare.com/api/telegram/bot&max_connections=45&drop_pending_updates=true&secret_token=<секретный_ключ>
+https://api.telegram.org/bot{ТОКЕН}/setWebhook?url=https://{ваш домен}.trycloudflare.com/api/telegram/bot&max_connections=45&drop_pending_updates=true&secret_token={секретный_ключ}
 ```
 
 При успешной регистрации Telegram API вернёт:
@@ -99,7 +95,7 @@ https://api.telegram.org/bot<ТОКЕН>/setWebhook?url=https://<домен>.try
 ## Шаг 6 — Проверка статуса webhook
 
 ```
-https://api.telegram.org/bot<ТОКЕН>/getWebhookInfo
+https://api.telegram.org/bot{ТОКЕН}/getWebhookInfo
 ```
 
 Ожидаемый ответ:

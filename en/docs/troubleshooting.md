@@ -1,52 +1,49 @@
 # Troubleshooting
 
-This page covers the most common errors encountered when installing and running
-TG Support Bot, along with their root causes and step-by-step solutions.
+This page collects the errors most commonly encountered when installing and
+running TG Support Bot, with their root causes and concrete steps to resolve
+them.
 
-## SSL Certificate Setup Fails
+## Webhook settings keep getting reset
 
-The ACME client (e.g. Certbot) cannot obtain a certificate because port 80 is
-already held by another process — most commonly the system Nginx service.
+If the bot stops working a couple of days after the webhook is connected, the
+problem may be related to the VPS IP address being blocked by Telegram.
 
-Check which process is holding port 80:
+Try the following:
+1. Delete the existing webhooks
+```text
+https://api.telegram.org/bot{{TELEGRAM_TOKEN}}/deleteWebhook?drop_pending_updates=true
+```
+2. Connect the webhook with the VPS IP address specified. Example of a full request.
+```text
+https://api.telegram.org/bot{{TELEGRAM_TOKEN}}/setWebhook?url={{TELEGRAM_WEBHOOK}}&max_connections=45&drop_pending_updates=true&secret_token={{TELEGRAM_SECRET_KEY}}&ip_address=111.222.33.44
+```
+
+## SSL certificate setup fails
+
+Certbot or another ACME client cannot obtain a certificate because port 80 is
+held by another process (usually the system Nginx).
+
+Check which process is using port 80:
 
 ```bash
 sudo netstat -ltnp | grep -w ':80'
 ```
 
-If the system Nginx is responsible, stop it:
+If the system Nginx is holding it, stop it:
 
 ```bash
 sudo systemctl stop nginx
 ```
 
-Then re-run the certificate issuance command.
-
-## Grafana Fails to Start Due to Permission Error
-
-The `grafana` container exits immediately because the data directory is not
-writable by the Grafana process.
-
-Output of `docker compose logs grafana`:
-
-```text
-grafana  | GF_PATHS_DATA='/var/lib/grafana' is not writable.
-grafana  | You may have issues with file permissions, more information here: http://docs.grafana.org/installation/docker/#migrate-to-v51-or-later
-grafana  | mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied
-```
-
-Set the owner of the data directory to UID `472` (Grafana's internal user):
-
-```bash
-sudo chown -R 472:472 ./docker/grafana
-```
+Then re-run the certificate issuance.
 
 ## Error: Failed to open stream: Permission denied
 
-Laravel cannot write to the log file because the application does not have
-sufficient permissions on the storage directory.
+Laravel cannot write to the log file because of insufficient permissions on the
+directory.
 
-From the project root, fix the ownership:
+Go to the project root and fix the permissions:
 
 ```bash
 sudo chown -R 775 storage/logs/laravel.log
@@ -54,8 +51,7 @@ sudo chown -R 775 storage/logs/laravel.log
 
 ## Error: require(autoload.php): Failed to open stream
 
-The `vendor` directory is missing because Composer dependencies have not been
-installed.
+Composer dependencies are not installed — the `vendor` directory is missing.
 
 Container log output:
 
@@ -64,7 +60,7 @@ laravel_queue  | PHP Warning:  require(/var/www/vendor/autoload.php): Failed to 
 laravel_queue  | PHP Fatal error:  Uncaught Error: Failed opening required '/var/www/vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/artisan on line 10
 ```
 
-Install or update Composer dependencies:
+Install or update the dependencies:
 
 ```bash
 composer update
@@ -72,8 +68,8 @@ composer update
 
 ## Error: MissingAppKeyException
 
-The `APP_KEY` variable in `.env` is missing or empty — Laravel cannot perform
-encryption without it.
+The `APP_KEY` variable in `.env` is not set or is empty — Laravel cannot perform
+encryption.
 
 Generate a new application key:
 
@@ -83,30 +79,29 @@ php artisan key:generate
 
 ## Error: file_put_contents
 
-The directory owner does not match the user the web server runs as, preventing
-PHP from writing files.
+The directory owner does not match the user the web server runs as, so PHP
+cannot write the file.
 
 <!-- markdownlint-disable MD033 -->
-<img width="1043" height="921" alt="Screenshot of file_put_contents error" src="/images/troubleshooting/file-put-contents-error.png" />
+<img width="1043" height="921" alt="Screenshot of the file_put_contents error" src="/images/troubleshooting/file-put-contents-error.png" />
 <!-- markdownlint-enable MD033 -->
 
-Navigate to the directory that contains the project root:
+Go to the directory that contains the project root folder:
 
 ```bash
 cd /path/to/parent/directory
 ```
 
-Recursively transfer ownership to the `www-data` user:
+Recursively transfer ownership of the directory to the `www-data` user:
 
 ```bash
-sudo chown -R www-data:www-data project_directory_name
+sudo chown -R www-data:www-data directory_name
 ```
 
-## PostgreSQL Container Fails to Start
+## The PgSQL database container does not start
 
-The `pgdb` container exits on `docker compose up` with a data format
-incompatibility error — this typically happens after updating the PostgreSQL
-Docker image without migrating the underlying data.
+When started via `docker compose`, the `pgdb` container exits with a data format
+incompatibility error — usually after the PostgreSQL image is updated.
 
 Output of `docker compose logs pgdb`:
 
@@ -119,5 +114,4 @@ Error: in 18+, these Docker images are configured to store database data in a
        upgrading the underlying database using "pg_upgrade"...
 ```
 
-The recommended solution is documented in the
-[GitHub discussion](https://github.com/prog-time/tg-support-bot/discussions/55).
+A detailed solution is described in the [GitHub discussion](https://github.com/prog-time/tg-support-bot/discussions/55).
