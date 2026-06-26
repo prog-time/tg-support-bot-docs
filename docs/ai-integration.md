@@ -13,11 +13,11 @@ TG Support Bot поддерживает интеграцию с нескольк
 
 Подробнее по каждому провайдеру:
 
-[Инструкция DeepSeek](./docs/ai-deepseek.html)
+[Инструкция DeepSeek](/docs/ai-deepseek)
 
-[Инструкция GigaChat](./docs/ai-gigachat.html)
+[Инструкция GigaChat](/docs/ai-gigachat)
 
-[Инструкция OpenAI](./docs/ai-openai.html)
+[Инструкция OpenAI](/docs/ai-openai)
 
 ## Работа ИИ-ассистента в Telegram группе
 
