@@ -104,7 +104,11 @@ DB_PASSWORD=password
 Создайте первого администратора с помощью artisan команды:
 
 ```bash
-docker exec pet php artisan app:create-admin-user
+// Заходишь в контейнер
+docker compose exec app bash
+
+// Запускаешь команду
+php artisan app:create-admin-user
 ```
 
 ## Поздравляем
