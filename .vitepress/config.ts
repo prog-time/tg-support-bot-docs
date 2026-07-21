@@ -57,6 +57,7 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Интерактивные кнопки', link: '/docs/interactive-buttons' },
+                { text: 'Шаблон названия топика', link: '/docs/topic-name-template' },
               ],
             },
             {
@@ -168,6 +169,7 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Interactive Buttons', link: '/en/docs/interactive-buttons' },
+                { text: 'Topic Name Template', link: '/en/docs/topic-name-template' },
               ],
             },
             {
