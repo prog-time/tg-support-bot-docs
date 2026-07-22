@@ -61,14 +61,22 @@ support queue.
 
 ## Attachments
 
-Incoming emails are processed as text only — attachments from a
-customer's email aren't accepted. A manager's reply, on the other hand,
-can include a single file (including a photo) — it's delivered to the
-customer as a regular email attachment.
+An email — in either direction — can carry a single file, including a photo:
+
+- **From the customer** — an attachment on an incoming email shows up in
+  the Telegram topic as a photo or document (depending on the file type),
+  with the email's text as its caption.
+- **From the manager** — a reply with a file can be sent from the admin
+  panel, or as a regular message with an attachment typed straight into
+  the Telegram topic — the customer receives it as a normal email
+  attachment.
+
+If an incoming email has more than one attachment, only the first is
+forwarded.
 
 ## Current version limitations
 
-- **Incoming email is text only.** Attachments from customers aren't
-  accepted or stored.
+- **One file per email.** Both incoming and outgoing — no multiple
+  attachments at once.
 - **No interactive buttons.** The post-close rating prompt is sent to the
   recipient as plain text, with no tappable stars.
