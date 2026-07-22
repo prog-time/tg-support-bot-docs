@@ -59,10 +59,16 @@ support queue.
    delivered to the user over SMTP, with the correct subject (`Re: ...`)
    threaded to the original email.
 
+## Attachments
+
+Incoming emails are processed as text only — attachments from a
+customer's email aren't accepted. A manager's reply, on the other hand,
+can include a single file (including a photo) — it's delivered to the
+customer as a regular email attachment.
+
 ## Current version limitations
 
-- **Text only.** Attachments on incoming emails aren't accepted; a file
-  attached to a manager's reply is skipped with a warning in the log — the
-  reply text is still sent.
+- **Incoming email is text only.** Attachments from customers aren't
+  accepted or stored.
 - **No interactive buttons.** The post-close rating prompt is sent to the
   recipient as plain text, with no tappable stars.
