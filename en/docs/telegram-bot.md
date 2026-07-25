@@ -30,10 +30,18 @@ For local development, you can set up a webhook via
 3. Set a name and a username for the bot.
 4. Paste the token you receive into the **"Bot Token"** field.
 
-## 2. Telegram integration settings
+## 2. Creating a group to receive messages
+
+1. Create a new private Telegram group.
+2. Add the bot you created in @BotFather to the group and make it an administrator.
+3. In the group settings, enable **topics**.
+4. To find out the group ID, temporarily add **@getMyId** or a similar bot to the group. After getting the ID, remove it from the group.
+
+## 3. Telegram integration settings
 
 1. In the **"Token"** field, paste the token you received when creating the bot.
 2. In the **"Webhook Secret Key"** field, paste a random string (a password to protect the integration).
+3. In the **"Group ID for receiving messages"** field, paste the group ID you obtained in the previous step.
 
 ## Links
 
