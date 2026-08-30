@@ -77,6 +77,7 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Admin Panel', link: '/docs/admin-panel' },
+                { text: 'PWA-приложение и push-уведомления', link: '/docs/pwa-app' },
               ],
             },
             {
@@ -191,6 +192,7 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Admin Panel', link: '/en/docs/admin-panel' },
+                { text: 'PWA App and Push Notifications', link: '/en/docs/pwa-app' },
               ],
             },
             {
