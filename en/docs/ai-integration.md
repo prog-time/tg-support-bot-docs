@@ -19,15 +19,6 @@ More details on each provider:
 
 [OpenAI guide](/en/docs/ai-openai)
 
-## Using the AI Assistant in a Telegram group
-
-To use the AI assistant in a Telegram group, you need to create a separate Telegram bot.
-
-This is necessary so that messages from the assistant are visually distinct from operator messages.
-
-1. Create a new bot via [@BotFather](https://t.me/BotFather).
-2. Go to the **"Integrations"** section, to the **"AI Assistant Bot"** card.
-3. Enter the bot token in the **"AI Bot Token"** field.
 
 ## Configuring AI Assistant behavior
 
