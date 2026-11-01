@@ -9,6 +9,7 @@ Supported incoming request channels:
 - **Telegram** — via a public bot;
 - **VK** — via VKontakte community messages;
 - **Max** — via the platform's bot;
+- **Odnoklassniki** — via group messages;
 - **External API** — integration from any third-party service;
 - **Live chat widget** — an embeddable widget for your website.
 
