@@ -18,7 +18,7 @@ Before you begin, make sure the following requirements are met:
 Register a VPS running Ubuntu with Docker Compose preinstalled.
 The recommended amount of RAM is at least 1 GB.
 
-For hosting I recommend, for example, [Beget](https://beget.com/p658517).
+For hosting I recommend, for example, [Timeweb Cloud](https://timeweb.cloud/r/na42855).
 
 ### 2. Configure DNS
 
